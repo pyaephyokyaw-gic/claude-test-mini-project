@@ -1,0 +1,32 @@
+package com.studentmanagement.dto;
+
+import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * DTO for updating student information.
+ * All fields are optional - only provided fields will be updated.
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class StudentUpdateRequest {
+
+    @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
+    private String name;
+
+    @Email(message = "Invalid email format")
+    private String email;
+
+    @DecimalMin(value = "0.0", message = "Grade must be at least 0.0")
+    @DecimalMax(value = "100.0", message = "Grade must not exceed 100.0")
+    private Double grade;
+
+    @Min(value = 0, message = "Attendance must be at least 0")
+    @Max(value = 100, message = "Attendance must not exceed 100")
+    private Integer attendance;
+}
